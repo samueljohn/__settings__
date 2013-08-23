@@ -66,7 +66,6 @@ if [[ "$TERM_PROGRAM" == "DTerm" ]]; then
     'spectrum' \
     'utility' \
     'completion' \
-    'python' \
     'osx' \
     'git' \
     'archive'
@@ -96,7 +95,9 @@ source "$HOME/.zprezto/init.zsh"
 
 
 #----- My command line `note` tool to push to OS X notification center.
-source "$HOME/Dropbox/note/note.sh"
+if [ -f "$HOME/Dropbox/note/note.sh" ]; then
+    source "$HOME/Dropbox/note/note.sh"
+fi
 
 #----- Report timing statistics after long commands:
 export REPORTTIME=10
