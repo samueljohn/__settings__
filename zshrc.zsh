@@ -1,4 +1,6 @@
 # This is my ZSH configuration file that relies on zprezto.
+# This includes all the best of zprezto, so you don't need and should
+# remove your ~/.zpreztorc
 
 # Set the key mapping style to 'emacs' or 'vi'.
 #zstyle ':prezto:module:editor' keymap 'vi'
