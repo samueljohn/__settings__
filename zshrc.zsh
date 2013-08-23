@@ -1,6 +1,5 @@
 # This is my ZSH configuration file that relies on zprezto.
-# This includes all the best of zprezto, so you don't need and should
-# remove your ~/.zpreztorc
+# It includes all the best of zprezto, so you don't need ~/.zpreztorc
 
 # Set the key mapping style to 'emacs' or 'vi'.
 #zstyle ':prezto:module:editor' keymap 'vi'
@@ -50,14 +49,14 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'pattern' \
   'cursor'
 
-# Set the modules to load (browse modules).
-# The order matters.
 
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'sorin'
 
+# Set the modules to load (browse modules).
+# The order matters.
 if [[ "$TERM_PROGRAM" == "DTerm" ]]; then
     # these are only executed in DTerm shells
     zstyle ':prezto:*:*' color 'no'
@@ -90,10 +89,30 @@ else
     'prompt'
 fi
 
-source "$HOME/.zprezto/init.zsh"
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 # Customize to your needs...
 ###############################################################################
+
+#----- Silent helper
+quiet_which() {
+    which $1 1>/dev/null 2>/dev/null
+}
+
+#----- Make ZSH use the brew_zsh_completion.zsh
+# Initially (but only once) you may need to `rm -rf  ~/.zcompdump && compinit `
+if quiet_which brew
+then
+    [ ! -f $(brew --prefix)/share/zsh/site-functions/_brew ] && \
+        mkdir -p $(brew --prefix)/share/zsh/site-functions &>/dev/null && \
+        ln -s $(brew --prefix)/Library/Contributions/brew_zsh_completion.zsh \
+              $(brew --prefix)/share/zsh/site-functions/_brew
+    export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+fi
 
 
 #----- My command line `note` tool to push to OS X notification center.
@@ -108,16 +127,17 @@ export REPORTTIME=10
   # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`') '
 # }
 
+#----- Function called on every prompt line
 function prompt_sorin_pwd {
-# This helps me to see if I am in my production or testing homebrew install
-if [[ "$(which brew)" == "/homebrew/bin/brew" ]]; then
-    export _brew_info='🍺 '
-  else
-    export _brew_info=''
-  fi
+    # This helps me to see if I am in my production or testing homebrew install
+    if [[ "$(which brew)" == "/homebrew/bin/brew" ]]; then
+        export _brew_info='🍺 '
+    else
+        export _brew_info=''
+    fi
 }
 
-# Redefine how the prompt looks.
+#----- Make the prompt actually look cool (emoji, yay!)
 zstyle ':prezto:module:editor:info:keymap:primary' format ''
 zstyle ':prezto:module:git:info:branch' format '%b%f'
 zstyle ':prezto:module:git:info:clean' format '%F{113}'
@@ -138,9 +158,14 @@ RPROMPT='%F{242}%* ${_brew_info}${editor_info[keymap]}${editor_info[overwrite]}%
 #----- l - I am so used to it.
 alias l='ls'
 
-#----- My own little shell functions to make grep and find usable
-alias grepall='noglob grepall'
+#----- Make find useful
+function findall {
+    find . -name "$*"
+}
 alias findall='noglob findall'
+
+#----- I like my own git log alias.
+alias glg='git log --color --topo-order --all --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --'
 
 #----- zprezto overdid it. Who can remember all these?
 unalias gbc
@@ -162,8 +187,6 @@ unalias gdm
 unalias gdu
 unalias gdk
 # unalias gdi
-# unalias glg
-alias glg='git log --color --topo-order --all --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --'
 unalias gfc
 unalias gfm
 unalias gfr
