@@ -130,10 +130,10 @@ export REPORTTIME=10
 #----- Function called on every prompt line
 function prompt_sorin_pwd {
     # This helps me to see if I am in my production or testing homebrew install
-    if [[ "$(which brew)" == "/homebrew/bin/brew" ]]; then
+    if [[ "$(brew --prefix)" == "/homebrew" ]]; then
         export _brew_info='🍺 '
-    else
-        export _brew_info=''
+    elif [[ "$(brew --prefix)" == "/usr/local" ]]; then
+        export _brew_info='L'
     fi
 }
 
