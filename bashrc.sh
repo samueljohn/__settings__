@@ -1,5 +1,7 @@
 # http://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile
 
+source ${HOME}/.common
+
 #----- Typo fixxer and shortcuts
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -30,24 +32,6 @@ alias tree='tree -C'
 alias quicklook='qlmanage -p "$@" >& /dev/null'
 alias ql='qlmanage -p "$@" >& /dev/null'
 
-
-#----- Nice path plotter. Call pp $PATH or pp $PYTHONPATH
-function pp {
-    # This is magic. sed cannot insert newlines, but tr can. So we insert a
-    # ☺ and then replace it by \n
-    echo $* | tr ":" "\n" |  sed "s/ -/☺-/g" | tr "☺" "\n"
-}
-
-
-#----- Fix grep (make it recursive)
-function grepall {
-    grep -r "$*" .
-}
-
-#----- Make find useful
-function findall {
-    find . -name $*
-}
 
 #----- Colors:
 # regular colors

@@ -1,3 +1,5 @@
+source ${HOME}/.common
+
 # This is my ZSH configuration file that relies on zprezto.
 # It includes all the best of zprezto, so you don't need ~/.zpreztorc
 
