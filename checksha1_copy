@@ -1,0 +1,26 @@
+#!/bin/bash
+# Verify checksums of given files. For each FILE the sha1 is expected to
+# be in a file that ends on `FILE.sha1`.
+
+files_to_check="$*"
+sha1_ext=".sha1"
+
+for f in $files_to_check
+do
+	sha1_current=`openssl dgst -sha1 $f`
+	sha1_expected=`cat $f$sha1_ext`
+
+	if [ "$sha1_current" != "$sha1_expected" ]
+	then
+		echo -e "\033[0;31mSHA1 of $f invalid!\033[0m"
+		echo "Somebody, probably you, has changed the file."
+		echo ""
+		echo "If the file is **not** compromised, update the sha1:"
+		echo "  openssl dgst -sha1 $f >! $f$sha1_ext"
+		echo ""
+		exit -1
+	fi
+done
+
+# All hashes are fine!
+exit 0
