@@ -1,9 +1,11 @@
+#!/bin/sh
 
+settings_dir=$(pwd)
 
-settings_dir = "~/Dropbox/__settings__"
-
-cp "${settings_dir}/checksha1_copy" "~/checksha1"
-ln -s "${settings_dir}/.zshrc.sh" "~/.zshrc.shared.sh"
+ln -s "${settings_dir}/zshrc.zsh" "${HOME}/.zshrc"
+ln -s "${settings_dir}/bashrc.sh" "${HOME}/.bashrc"
+ln -s "${settings_dir}/profile.sh" "${HOME}/.profile"
+ln -s "${settings_dir}/vimrc" "${HOME}/.vimrc"
 
 
 # Todo:
