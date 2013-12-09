@@ -134,11 +134,11 @@ function konsolename {
 if [ $# -eq 0 ] ; then
     # If there are no arguments, we reset the PS1, and so the title to the default.
     if [ $DISPLAY ] ; then
-        export PS1="$c_gray\t $c_cyan\h:$c_em_blue\${SHORT_PWD}\
+        export PS1="$c_gray\t $c_green\u$c_reset@$c_cyan\h:$c_em_blue\${SHORT_PWD}\
 ${c_reset}\${GIT_BRACKET_OPEN}${c_green}\${GIT_BRANCH_OK}${c_red}\${GIT_BRANCH_DIRTY}${c_reset}\${GIT_BRACKET_CLOSE}\
 ${c_green} ❯ ${c_reset}\[\033]0;@\h:\${SHORT_PWD}\007\]"
     else
-        export PS1="$c_gray\t $c_cyan\h:$c_em_blue\${SHORT_PWD}\
+        export PS1="$c_gray\t $c_green\u$c_reset@$c_cyan\h:$c_em_blue\${SHORT_PWD}\
 ${c_reset}\${GIT_BRACKET_OPEN}${c_green}\${GIT_BRANCH_OK}${c_red}\${GIT_BRANCH_DIRTY}${c_reset}\${GIT_BRACKET_CLOSE}\
 ${c_green} ❯ ${c_reset}"
     fi
@@ -147,11 +147,11 @@ else
     # and we also need to escape the dollar-sign in front of "(bash_prompt_command)"
     # in order to have it evaluated later on.
     if [ $DISPLAY ] ; then
-        export PS1="$c_gray\t $c_cyan\h:$c_em_blue\${SHORT_PWD}\
+        export PS1="$c_gray\t $c_green\u$c_reset@$c_cyan\h:$c_em_blue\${SHORT_PWD}\
 ${c_reset}\${GIT_BRACKET_OPEN}${c_green}\${GIT_BRANCH_OK}${c_red}\${GIT_BRANCH_DIRTY}${c_reset}\${GIT_BRACKET_CLOSE}\
 ${c_green} ❯ ${c_reset}\[\033]0;@\h: $* \007\]"
     else
-        export PS1="$c_gray\t $c_cyan\h:$c_em_blue\${SHORT_PWD}\
+        export PS1="$c_gray\t $c_green\u$c_reset@$c_cyan\h:$c_em_blue\${SHORT_PWD}\
 ${c_reset}\${GIT_BRACKET_OPEN}${c_green}\${GIT_BRANCH_OK}${c_red}\${GIT_BRANCH_DIRTY}${c_reset}\${GIT_BRACKET_CLOSE}\
 ($*) ${c_green} ❯ ${c_reset}"
     fi
