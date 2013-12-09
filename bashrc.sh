@@ -2,6 +2,7 @@
 
 #----- Typo fixxer and shortcuts
 alias cd..='cd ..'
+alias ..='cd ..'
 alias ll='ls -lah'
 alias l='ls'
 alias g='git'
