@@ -4,7 +4,8 @@
 alias cd..='cd ..'
 alias ll='ls -lah'
 alias l='ls'
-alias g='git status'
+alias g='git'
+alias gws='git status --short'
 alias gco='git checkout'
 
 
