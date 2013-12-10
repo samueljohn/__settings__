@@ -48,7 +48,8 @@ alias l='ls'
 alias la='ls -la'
 
 #----- Set a language, so tools don't start to shout at me in German
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+unset LC_CTYPE  # to avoid perl warnings
 
 #----- IPython
 alias ipythonw="ipython -wthread"
