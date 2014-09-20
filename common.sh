@@ -74,6 +74,8 @@ if [ -f /usr/_local/bin/virtualenvwrapper.sh ]; then
     source /usr/_local/bin/virtualenvwrapper.sh
 fi
 
+#----- Mono stuff
+export MONO_GAC_PREFIX="$(brew --prefix)"
 
 export MANPATH
 export PATH
