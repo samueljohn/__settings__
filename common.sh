@@ -23,6 +23,9 @@ function findall {
     find . -name "$*"
 }
 
+#----- I can't remember how to update locate
+alias update-locate='sudo /usr/libexec/locate.updatedb'
+
 #----- Nice path plotter. Call pp $PATH or pp $PYTHONPATH
 function pp {
     # Sed cannot insert newlines, but tr can. So we insert a
