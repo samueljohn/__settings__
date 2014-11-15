@@ -1,3 +1,4 @@
+# Source my common stuff, I use for ZSH and BASH.
 source ${HOME}/.common
 
 # This is my ZSH configuration file that relies on zprezto.
@@ -24,16 +25,8 @@ zstyle ':prezto:load' zmodule 'attr' 'stat'
 # Set the Zsh functions to load (man zshcontrib).
 zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
-#
-# GPG-Agent
-#
-
 # Enable SSH-Agent protocol emulation.
 # zstyle ':prezto:module:gpg-agent' ssh-support 'yes'
-
-#
-# SSH-Agent
-#
 
 # Enable ssh-agent forwarding.
 # zstyle ':prezto:module:ssh-agent' forwarding 'yes'
@@ -52,10 +45,11 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'cursor'
 
 
-# Set the prompt theme to load.
-# Setting it to 'random' loads a random theme.
-# Auto set to 'off' on dumb terminals.
+# Set the prompt theme to load. I use the infrastructure of sorin and then
+# redefining some things to make it even more godsent.
 zstyle ':prezto:module:prompt' theme 'sorin'
+
+
 
 # Set the modules to load (browse modules).
 # The order matters.
