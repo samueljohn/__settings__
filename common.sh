@@ -9,7 +9,7 @@ then
 else
     # I have my production Homebrew at /usr/_local so that my testing Homebrew
     # whih lives at /homebrew does not accidently find stuff in /usr/local.
-    PATH="/usr/_local/bin:/usr/_local/sbin:/opt/X11/bin:/usr/texbin:/$HOME/bin:$PATH"
+    PATH="/usr/_local/bin:/usr/_local/sbin:/opt/X11/bin:/usr/texbin:/$HOME/bin:/sbin:$PATH"
     MANPATH="/usr/_local/share/man:/usr/local/share/man:$MANPATH"
 fi
 
