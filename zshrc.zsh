@@ -150,7 +150,7 @@ zstyle ':prezto:module:git:info:keys' format \
   'prompt'  ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s' \
   'rprompt' '%A%B%S%a%d%m%r%U%u'
 PROMPT_PATH_MAX_LENGTH=30
-PROMPT='${SSH_TTY:+[%n@%m]}%F{cyan}%$PROMPT_PATH_MAX_LENGTH<…<%~%<< %F{113}%(?::%F{red})%(!.%B❯❯❯%f%b.%B❯%f%b) '
+PROMPT='%F{242}${SSH_TTY:+[%n@%m]}%F{cyan}%$PROMPT_PATH_MAX_LENGTH<…<%~%<< %F{113}%(?::%F{red})%(!.%B❯❯❯%f%b.%B❯%f%b) '
 RPROMPT='%F{242}%* ${_brew_info}${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}%f${git_info:+${(e)git_info[prompt]}}${git_info[rprompt]}'
 
 
