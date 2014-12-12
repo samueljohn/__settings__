@@ -70,9 +70,7 @@ alias subl=$VISUAL
 
 #----- Virtualenv (separate python environments)
 export VIRTUALENVWRAPPER_PYTHON=/usr/_local/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/_local/bin/virtualenv-3.3
-export WORKON_HOME=$HOME/Dropbox/__settings__/virtualenvs
-export VIRTUALENV_USE_DISTRIBUTE=true
+export WORKON_HOME=$HOME/__settings__/virtualenvs
 if [ -f /usr/_local/bin/virtualenvwrapper.sh ]; then
     source /usr/_local/bin/virtualenvwrapper.sh
 fi
