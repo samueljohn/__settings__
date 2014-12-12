@@ -95,13 +95,13 @@ fi
 ###############################################################################
 
 #----- Silent helper
-quiet_which() {
-    which $1 1>/dev/null 2>/dev/null
+available() {
+    command -v $1 >/dev/null 2>&1
 }
 
 #----- Make ZSH use the brew_zsh_completion.zsh
 # Initially (but only once) you may need to `rm -rf  ~/.zcompdump && compinit `
-if quiet_which brew
+if available brew
 then
     [ ! -f $(brew --prefix)/share/zsh/site-functions/_brew ] && \
         mkdir -p $(brew --prefix)/share/zsh/site-functions &>/dev/null && \
@@ -125,11 +125,14 @@ export REPORTTIME=10
 
 #----- Function called on every prompt line
 function prompt_sorin_pwd {
-    # This helps me to see if I am in my production or testing homebrew install
-    if [[ "$(brew --prefix)" == "/homebrew" ]]; then
-        export _brew_info='🍺 '
-    elif [[ "$(brew --prefix)" == "/usr/local" ]]; then
-        export _brew_info='L'
+    if available brew
+    then
+        # This helps me to see if I am in my production or testing homebrew install
+        if [[ "$(brew --prefix)" == "/homebrew" ]]; then
+            export _brew_info='🍺 '
+        elif [[ "$(brew --prefix)" == "/usr/local" ]]; then
+            export _brew_info='L'
+        fi
     fi
 }
 
