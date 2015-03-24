@@ -123,6 +123,9 @@ export REPORTTIME=10
   # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`') '
 # }
 
+#----- Allow bash-style comments in the interactive prompt
+setopt interactivecomments
+
 #----- Function called on every prompt line
 function prompt_sorin_pwd {
     if available brew
