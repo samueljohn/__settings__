@@ -101,13 +101,14 @@ available() {
 
 #----- Make ZSH use the brew_zsh_completion.zsh
 # Initially (but only once) you may need to `rm -rf  ~/.zcompdump && compinit `
+
 if available brew
 then
     [ ! -f $(brew --prefix)/share/zsh/site-functions/_brew ] && \
         mkdir -p $(brew --prefix)/share/zsh/site-functions &>/dev/null && \
         ln -s $(brew --prefix)/Library/Contributions/brew_zsh_completion.zsh \
               $(brew --prefix)/share/zsh/site-functions/_brew
-    export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+    fpath=($(brew --prefix)/share/zsh-completions $fpath)
 fi
 
 
@@ -150,11 +151,14 @@ zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}🔨 %f%%b'
 zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}🚧 %f%%b'
 zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}⚡ %f%%b'
 zstyle ':prezto:module:git:info:keys' format \
-  'prompt'  ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s' \
-  'rprompt' '%A%B%S%a%d%m%r%U%u'
+    'status' ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
+# [%D{%L:%M:%S %p}]
+# zstyle ':prezto:module:git:info:keys' format \
+  # 'prompt'  ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s' \
+  # 'rprompt' '%A%B%S%a%d%m%r%U%u'
 PROMPT_PATH_MAX_LENGTH=30
 PROMPT='%F{242}${SSH_TTY:+%n@%m }%F{cyan}%$PROMPT_PATH_MAX_LENGTH<…<%~%<< %F{113}%(?::%F{red})%(!.%B❯❯❯%f%b.%B❯%f%b) '
-RPROMPT='%F{242}%* ${_brew_info}${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}%f${git_info:+${(e)git_info[prompt]}}${git_info[rprompt]}'
+RPROMPT='%F{242}%* ${_brew_info}${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}%f${git_info:+${(e)git_info[status]}}'
 
 
 #----- l - I am so used to it.
