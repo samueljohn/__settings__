@@ -55,11 +55,6 @@ export LANG="en_US.UTF-8"
 export LC_TYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-#----- IPython
-alias ipythonw="ipython -wthread"
-alias pycon2='ipython qtconsole --pylab=inline --pprint --editor=subl'
-alias pycon='ipython3 qtconsole --pylab=inline --pprint --editor=subl'
-
 
 #----- Sublime editor
 export VISUAL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
@@ -67,13 +62,6 @@ export EDITOR="/usr/_local/bin/vim"
 alias edit="$VISUAL -w -n"
 alias subl=$VISUAL
 
-
-#----- Virtualenv (separate python environments)
-export VIRTUALENVWRAPPER_PYTHON=/usr/_local/bin/python3
-export WORKON_HOME=$HOME/__settings__/virtualenvs
-if [ -f /usr/_local/bin/virtualenvwrapper.sh ]; then
-    source /usr/_local/bin/virtualenvwrapper.sh
-fi
 
 #----- Mono stuff
 if command -v brew >/dev/null 2>&1; then
