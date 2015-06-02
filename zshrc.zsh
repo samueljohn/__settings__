@@ -120,25 +120,9 @@ fi
 #----- Report timing statistics after long commands:
 export REPORTTIME=10
 
-# function virtualenv_info {
-  # [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`') '
-# }
 
 #----- Allow bash-style comments in the interactive prompt
 setopt interactivecomments
-
-#----- Function called on every prompt line
-function prompt_sorin_pwd {
-    if available brew
-    then
-        # This helps me to see if I am in my production or testing homebrew install
-        if [[ "$(brew --prefix)" == "/homebrew" ]]; then
-            export _brew_info='🍺 '
-        elif [[ "$(brew --prefix)" == "/usr/local" ]]; then
-            export _brew_info='L'
-        fi
-    fi
-}
 
 #----- Make the prompt actually look cool (emoji, yay!)
 zstyle ':prezto:module:editor:info:keymap:primary' format ''
@@ -152,14 +136,23 @@ zstyle ':prezto:module:git:info:untracked' format ' %%B%F{white}🚧 %f%%b'
 zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}⚡ %f%%b'
 zstyle ':prezto:module:git:info:keys' format \
     'status' ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
-# [%D{%L:%M:%S %p}]
-# zstyle ':prezto:module:git:info:keys' format \
-  # 'prompt'  ' %F{242}±%f$(coalesce "%C%b" "%p" "%c")%s' \
-  # 'rprompt' '%A%B%S%a%d%m%r%U%u'
+
 PROMPT_PATH_MAX_LENGTH=30
 PROMPT='%F{242}${SSH_TTY:+%n@%m }%F{cyan}%$PROMPT_PATH_MAX_LENGTH<…<%~%<< %F{113}%(?::%F{red})%(!.%B❯❯❯%f%b.%B❯%f%b) '
-RPROMPT='%F{242}%* ${_brew_info}${editor_info[keymap]}${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}%f${git_info:+${(e)git_info[status]}}'
 
+function samuel_precmd {
+  RPROMPT=' %F{242}%* '
+}
+add-zsh-hook precmd samuel_precmd
+TMOUT=1
+TRAPALRM() {
+    # http://stackoverflow.com/questions/26526175/zsh-menu-completion-causes-problems-after-zle-reset-prompt?lq=1
+    # http://stackoverflow.com/questions/20231533/constantly-updated-clock-in-zsh-prompt-without-any-drawback
+    # echo $WIDGET # this line was for debugging
+    if [ "$WIDGET" != "expand-or-complete-with-indicator" ]; then
+        zle reset-prompt
+    fi
+}
 
 #----- l - I am so used to it.
 alias l='ls'
