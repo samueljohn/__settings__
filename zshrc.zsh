@@ -143,8 +143,13 @@ PROMPT='%F{242}${SSH_TTY:+%n@%m }%F{cyan}%$PROMPT_PATH_MAX_LENGTH<…<%~%<< %F{1
 function samuel_precmd {
   RPROMPT=' %F{242}%* '
 }
-add-zsh-hook precmd samuel_precmd
-TMOUT=1
+autoload -U is-at-least
+
+if is-at-least 5; then
+    add-zsh-hook precmd samuel_precmd
+    TMOUT=1
+fi
+
 TRAPALRM() {
     # http://stackoverflow.com/questions/26526175/zsh-menu-completion-causes-problems-after-zle-reset-prompt?lq=1
     # http://stackoverflow.com/questions/20231533/constantly-updated-clock-in-zsh-prompt-without-any-drawback
