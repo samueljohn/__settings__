@@ -145,7 +145,7 @@ function samuel_precmd {
 }
 autoload -U is-at-least
 
-if is-at-least 5; then
+if is-at-least 5.0.7; then
     add-zsh-hook precmd samuel_precmd
     TMOUT=1
 fi
